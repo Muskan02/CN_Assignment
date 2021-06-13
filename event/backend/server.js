@@ -18,6 +18,11 @@ connection.once('open', () => {
 	console.log('MongoDB connection established successfully');
 });
 
+const eventsRouter = require('./routes/events');
+
+app.use('/events', eventsRouter);
+
+
 app.listen(port, () => {
 	console.log(`Server is running on port: ${port}`);
 });
