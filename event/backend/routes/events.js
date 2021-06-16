@@ -7,6 +7,30 @@ router.route('/').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/coding').get((req, res) => {
+	Event.find({category: "Coding Events"})
+		.then(events => res.json(events))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/webinar').get((req, res) => {
+	Event.find({category: "Webinars"})
+		.then(events => res.json(events))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/bootcamp').get((req, res) => {
+	Event.find({category: "Bootcamp Events"})
+		.then(events => res.json(events))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/workshop').get((req, res) => {
+	Event.find({category: "Workshops"})
+		.then(events => res.json(events))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
 	const name = req.body.name;
 	const description = req.body.description;
