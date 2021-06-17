@@ -9,6 +9,7 @@ const port = process.env.PORT || 9000;
 
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'))
 
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}

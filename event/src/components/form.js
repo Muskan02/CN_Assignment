@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const Checkbox = props => (
     <input type='checkbox' {...props}/>
@@ -30,7 +31,7 @@ export default class Form extends Component {
       venue : '',
       tags : [],
       category : 'Coding Events',
-      fav : '',
+      fav : false,
       categoryOptions : ["Coding Events", "Webinars", "Bootcamp Events", "Workshops"],
     }
   }
@@ -49,7 +50,7 @@ export default class Form extends Component {
 
   onChangePhoto(e) {
     this.setState({
-      photo: URL.createObjectURL(e.target.files[0])
+      photo: e.target.files[0]
     });
   }
 
@@ -94,18 +95,43 @@ export default class Form extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const event = {
-      name : this.state.name,
-      description : this.state.description,
-      photo : this.state.photo,
-      fee : this.state.fee,
-      startdate : this.state.startdate,
-      venue : this.state.venue,
-      tags : this.state.tags,
-      category : this.state.category,
-      fav : this.state.fav,
-    }
-    console.log(event);
+    const formdata = new FormData();
+    console.log(this.state.tags)
+    formdata.append('photo',this.state.photo,this.state.photo.name)
+    formdata.append('name',this.state.name)
+    formdata.append('description',this.state.description)
+    formdata.append('fee',this.state.fee)
+    formdata.append('startdate',this.state.startdate)
+    formdata.append('venue',this.state.venue)
+    formdata.append('tags',this.state.tags)
+    formdata.append('category',this.state.category)
+    formdata.append('fav',this.state.fav)
+
+    console.log(formdata)
+
+    // const event = {
+    //   name : this.state.name,
+    //   description : this.state.description,
+    //   photo : this.state.photo,
+    //   fee : this.state.fee,
+    //   startdate : this.state.startdate,
+    //   venue : this.state.venue,
+    //   tags : this.state.tags,
+    //   category : this.state.category,
+    //   fav : this.state.fav,
+    // }
+    // console.log(event);
+
+    axios( {
+      method: "post",
+      data: formdata,
+      url: "http://localhost:9000/events/add",
+      headers: { "Content-Type": "application/json" },
+    } )
+      .then( ( res ) => {
+        console.log(res.data);
+      } )
+      .catch( ( err ) => console.log( err ) );
 
     // window.location = '/';
   }
@@ -114,7 +140,7 @@ export default class Form extends Component {
     return (
       <div>
         <h3>Create Event</h3>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit} enctype="multipart/form-data">
           <div className="form-group">
 
             <label>Name</label>
@@ -131,6 +157,7 @@ export default class Form extends Component {
 
             <label>Photo</label>
             <input className="form-control" type='file' 
+              filename="photo"
               required
               onChange={this.onChangePhoto} />   
 

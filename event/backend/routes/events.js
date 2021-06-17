@@ -1,5 +1,17 @@
 const router = require('express').Router();
 let Event = require('../models/event.model');
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+	destination: (req, file, callback) => {
+		callback(null, './uploads/');
+	},
+	filename: (req, file, callback) => {
+		callback(null, Date.now() + '-' + file.originalname);
+	}
+});
+
+const upload = multer({storage: storage});
 
 router.route('/').get((req, res) => {
 	Event.find()
@@ -31,14 +43,15 @@ router.route('/workshop').get((req, res) => {
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/add').post(upload.single("photo"),(req, res) => {
+	console.log("yee",req.body.tags);
 	const name = req.body.name;
 	const description = req.body.description;
-	const photo = req.body.photo;
+	const photo = req.file.path;
 	const fee = Number(req.body.fee);
 	const startdate = Date.parse(req.body.startdate);
 	const venue = req.body.venue;
-	const tags = req.body.tags.replace(/\s/g, '').split(",");
+	const tags = req.body.tags.split(',')
 	const category = req.body.category;
 	const fav = req.body.fav;
 
@@ -53,10 +66,11 @@ router.route('/add').post((req, res) => {
 		category,
 		fav,
 	});
-
+	console.log(newEvent);
 	newEvent.save()
 	.then(() => res.json('Event Created!'))
-	.catch(err => res.status(400).json('Error: ' + err));
+	.catch(err => {res.status(400).json('Error: ' + err)
+console.log(err)});
 });
 
 module.exports = router;

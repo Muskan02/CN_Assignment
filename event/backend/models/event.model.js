@@ -7,7 +7,7 @@ const categoryOptions = ["Coding Events", "Webinars", "Bootcamp Events", "Worksh
 const eventSchema = new Schema({
 	name : {type: String, required: true},
 	description : {type: String, required: true},
-	photo : {data: Buffer, contentType: String},
+	photo : {type: String, required: true},
 	fee : {type: Number, required: true},
 	startdate : {type: Date, required: true},
 	venue : {type: String, required: true},
