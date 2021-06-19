@@ -20,8 +20,8 @@ const Tabs = ({ color }) => {
                 className={
                   "text-xs font-bold no-underline uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 1
-                    ? "text-white bg-" + color + "-600"
-                    : "text-" + color + "-600 bg-white")
+                    ? "text-white bg-yellow-600"
+                    : "text-yellow-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -39,8 +39,8 @@ const Tabs = ({ color }) => {
                 className={
                   "text-xs font-bold no-underline uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 2
-                    ? "text-white bg-" + color + "-600"
-                    : "text-" + color + "-600 bg-white")
+                    ? "text-white bg-yellow-600"
+                    : "text-yellow-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -58,8 +58,8 @@ const Tabs = ({ color }) => {
                 className={
                   "text-xs font-bold no-underline uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 3
-                    ? "text-white bg-" + color + "-600"
-                    : "text-" + color + "-600 bg-white")
+                    ? "text-white bg-yellow-600"
+                    : "text-yellow-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -77,8 +77,8 @@ const Tabs = ({ color }) => {
                 className={
                   "text-xs font-bold no-underline uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 4
-                    ? "text-white bg-" + color + "-600"
-                    : "text-" + color + "-600 bg-white")
+                    ? "text-white bg-yellow-600"
+                    : "text-yellow-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -96,8 +96,8 @@ const Tabs = ({ color }) => {
                 className={
                   "text-xs font-bold uppercase no-underline px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 5
-                    ? "text-white bg-" + color + "-600"
-                    : "text-" + color + "-600 bg-white")
+                    ? "text-white bg-yellow-600"
+                    : "text-yellow-600 bg-white")
                 }
                 onClick={e => {
                   e.preventDefault();
@@ -136,12 +136,12 @@ const Tabs = ({ color }) => {
       </div>
     </>
   );
-};
+}
 
 export default function TabsRender() {
   return (
     <>
-      <Tabs color="yellow" />;
+      <Tabs color="yellow" />
     </>
   );
 }

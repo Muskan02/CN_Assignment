@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from "./card";
+import Content from "./content";
 
 
 export default class BootcampList extends Component {
@@ -44,7 +44,7 @@ export default class BootcampList extends Component {
 
 	render() {
 		return(
-			<Card events={this.state.events}/>
+			<Content events={this.state.events}/>
 			)
 	}
 }

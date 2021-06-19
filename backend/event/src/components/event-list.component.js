@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from "./card";
+import Content from "./content";
 
 
 
@@ -45,7 +45,7 @@ export default class CodingList extends Component {
 
   render() {
     return(
-      <Card events={this.state.events}/>
+      <Content events={this.state.events}/>
       )
   }
 }
