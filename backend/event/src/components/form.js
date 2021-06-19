@@ -105,7 +105,6 @@ export default class Form extends Component {
     e.preventDefault();
 
     const formdata = new FormData();
-    console.log(this.state.tags)
     formdata.append('photo',this.state.photo,this.state.photo.name)
     formdata.append('name',this.state.name)
     formdata.append('description',this.state.description)
@@ -117,7 +116,6 @@ export default class Form extends Component {
     formdata.append('subcategory',this.state.subcategory)
     formdata.append('fav',this.state.fav)
 
-    console.log(formdata)
 
     // const event = {
     //   name : this.state.name,

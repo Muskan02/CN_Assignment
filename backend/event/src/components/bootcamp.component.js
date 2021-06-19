@@ -16,7 +16,6 @@ export default class BootcampList extends Component {
       .then(response => response.json())
       .then(events=>{
         this.setState({events:events});
-        console.log(this.state.events);
       })
       .catch((err)=>(console.log(err)))
      }
@@ -26,7 +25,6 @@ export default class BootcampList extends Component {
       .then(response => response.json())
       .then(events=>{
         this.setState({events:events});
-        console.log(this.state.events);
       })
       .catch((err)=>(console.log(err)))
      }
@@ -36,7 +34,6 @@ export default class BootcampList extends Component {
       .then(response => response.json())
       .then(events=>{
         this.setState({events:events});
-        console.log(this.state.events);
       })
       .catch((err)=>(console.log(err)))
      }
