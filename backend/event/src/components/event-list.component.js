@@ -1,4 +1,4 @@
-import React, { Component , useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import Content from "./content";
 
 
@@ -27,7 +27,6 @@ function EventList (props) {
       .then(({totalPages, events})=>{
         setEvents(events);
         setNumberOfPages(totalPages);
-        console.log(pageNumber);
       })
       .catch((err)=>(console.log(err)))
      }

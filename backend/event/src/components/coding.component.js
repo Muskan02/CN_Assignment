@@ -27,7 +27,6 @@ function CodingList (props) {
       .then(({totalPages, events})=>{
         setEvents(events);
         setNumberOfPages(totalPages);
-        console.log(pageNumber);
       })
       .catch((err)=>(console.log(err)))
      }
