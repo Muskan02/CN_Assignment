@@ -13,7 +13,7 @@ export default class Cards extends Component {
 					this.props.events.map((event,index)=>{
 						return(
 							
-						        <div className="my-1 px-1 w-full lg:my-4 lg:px-4 lg:w-1/3" key={event.id}>
+						        <div className="my-1 px-1 w-full lg:my-4 lg:px-4 lg:w-1/3" key={index}>
 						            <article className="bg-white rounded-lg shadow-lg max-w-xs mx-auto lg:mx-0 flex-grow">						             
 						                <img alt="Placeholder" className="block h-auto w-full" src={"https://cn-events.herokuapp.com/" + event.photo}/>					
 						                <header className="flex items-center justify-between leading-tight p-2 md:p-4">

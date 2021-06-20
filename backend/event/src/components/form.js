@@ -133,7 +133,7 @@ export default class Form extends Component {
     axios( {
       method: "post",
       data: formdata,
-      url: "https://cn-events.herokuapp.com/add",
+      url: "https://cn-events.herokuapp.com/events/add",
       headers: { "Content-Type": "application/json" },
     } )
       .then( ( res ) => {
@@ -141,7 +141,7 @@ export default class Form extends Component {
       } )
       .catch( ( err ) => console.log( err ) );
 
-    // window.location = '/';
+    window.location = '/';
   }
 
   render() {

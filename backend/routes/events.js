@@ -13,93 +13,137 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-router.route('/up').get((req, res) => {
-	Event.find({subcategory: "Upcoming"})
+router.route('/up').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({subcategory: "Upcoming"});
+	await Event.find({subcategory: "Upcoming"}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+		.then(events => res.json({totalPages: Math.ceil(total / PAGE_SIZE),events}))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/ar').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({subcategory: "Archived"});
+	await Event.find({subcategory: "Archived"}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+		.then(events => res.json({totalPages: Math.ceil(total / PAGE_SIZE),events}))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/fav').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({subcategory: "All Time Favorites"});
+	await Event.find({subcategory: "All Time Favorites"}).limit(PAGE_SIZE).skip(PAGE_SIZE * page)
+		.then(events => res.json({totalPages: Math.ceil(total / PAGE_SIZE),events}))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/coding/up').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Coding Events", subcategory: "Upcoming"});
+	await Event.find({category: "Coding Events", subcategory: "Upcoming"})
+		.then(events => res.json({totalPages: Math.ceil(total / PAGE_SIZE),events}))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/coding/ar').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Coding Events", subcategory: "Archived"});
+	await Event.find({category: "Coding Events", subcategory: "Archived"})
+		.then(events => res.json({totalPages: Math.ceil(total / PAGE_SIZE),events}))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/coding/fav').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Coding Events", subcategory: "All Time Favorites"});
+	await Event.find({category: "Coding Events", subcategory: "All Time Favorites"})
+		.then(events => res.json({totalPages: Math.ceil(total / PAGE_SIZE),events}))
+		.catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/webinar/up').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Webinars", subcategory: "Upcoming"});
+	await Event.find({category: "Webinars", subcategory: "Upcoming"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/ar').get((req, res) => {
-	Event.find({subcategory: "Archived"})
+router.route('/webinar/ar').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Webinars", subcategory: "Archived"});
+	await Event.find({category: "Webinars", subcategory: "Archived"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-
-router.route('/fav').get((req, res) => {
-	Event.find({subcategory: "All Time Favorites"})
+router.route('/webinar/fav').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Webinars", subcategory: "All Time Favorites"});
+	await Event.find({category: "Webinars", subcategory: "All Time Favorites"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/coding/up').get((req, res) => {
-	Event.find({category: "Coding Events", subcategory: "Upcoming"})
+router.route('/bootcamp/up').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Bootcamp Events", subcategory: "Upcoming"});
+	await Event.find({category: "Bootcamp Events", subcategory: "Upcoming"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/coding/ar').get((req, res) => {
-	Event.find({category: "Coding Events", subcategory: "Archived"})
+router.route('/bootcamp/ar').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Bootcamp Events", subcategory: "Archived"});
+	await Event.find({category: "Bootcamp Events", subcategory: "Archived"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/coding/fav').get((req, res) => {
-	Event.find({category: "Coding Events", subcategory: "All Time Favorites"})
+router.route('/bootcamp/fav').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Bootcamp Events", subcategory: "All Time Favorites"});
+	await Event.find({category: "Bootcamp Events", subcategory: "All Time Favorites"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/webinar/up').get((req, res) => {
-	Event.find({category: "Webinars", subcategory: "Upcoming"})
+router.route('/workshop/up').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Workshops", subcategory: "Upcoming"});
+	await Event.find({category: "Workshops", subcategory: "Upcoming"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/webinar/ar').get((req, res) => {
-	Event.find({category: "Webinars", subcategory: "Archived"})
+router.route('/workshop/ar').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Workshops", subcategory: "Archived"});
+	await Event.find({category: "Workshops", subcategory: "Archived"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/webinar/fav').get((req, res) => {
-	Event.find({category: "Webinars", subcategory: "All Time Favorites"})
-		.then(events => res.json(events))
-		.catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/bootcamp/up').get((req, res) => {
-	Event.find({category: "Bootcamp Events", subcategory: "Upcoming"})
-		.then(events => res.json(events))
-		.catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/bootcamp/ar').get((req, res) => {
-	Event.find({category: "Bootcamp Events", subcategory: "Archived"})
-		.then(events => res.json(events))
-		.catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/bootcamp/fav').get((req, res) => {
-	Event.find({category: "Bootcamp Events", subcategory: "All Time Favorites"})
-		.then(events => res.json(events))
-		.catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/workshop/up').get((req, res) => {
-	Event.find({category: "Workshops", subcategory: "Upcoming"})
-		.then(events => res.json(events))
-		.catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/workshop/ar').get((req, res) => {
-	Event.find({category: "Workshops", subcategory: "Archived"})
-		.then(events => res.json(events))
-		.catch(err => res.status(400).json('Error: ' + err));
-});
-
-router.route('/workshop/fav').get((req, res) => {
-	Event.find({category: "Workshops", subcategory: "All Time Favorites"})
+router.route('/workshop/fav').get(async (req, res) => {
+	const PAGE_SIZE = 20;
+	const page = parseInt(req.query.page || "0");
+	const total = await Event.countDocuments({category: "Workshops", subcategory: "All Time Favorites"});
+	await Event.find({category: "Workshops", subcategory: "All Time Favorites"})
 		.then(events => res.json(events))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
